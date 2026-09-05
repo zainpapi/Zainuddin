@@ -238,6 +238,7 @@ if (!isTouch) {
   });
 
   let bobPhase = 0;
+  let rotorPhase = 0;
 
   /* pause the whole simulation while the hero is off-screen (battery + perf) */
   let heroInView = true;
@@ -281,32 +282,89 @@ if (!isTouch) {
 
   function drawDrone() {
     ctx.clearRect(0, 0, W, H);
+    const ink = getComputedStyle(document.body).getPropertyValue("--ink").trim() || "#3ef0a2";
+    rotorPhase += 0.32;
+
+    // exhaust trail
     for (const pt of drone.parts) {
       ctx.beginPath();
       ctx.arc(pt.x, pt.y, 1.5 + 3.5 * pt.life, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(62, 240, 162, ${pt.life * 0.5})`;
       ctx.fill();
     }
-    // rotor cross + scanning eye
-    ctx.strokeStyle = "#3ef0a2";
-    ctx.lineWidth = 3;
+
+    // scan beam — the phantom is always watching below
+    const beam = ctx.createLinearGradient(drone.x, drone.y + 46, drone.x, drone.y + 200);
+    beam.addColorStop(0, "rgba(62, 240, 162, 0.22)");
+    beam.addColorStop(1, "rgba(62, 240, 162, 0)");
+    ctx.fillStyle = beam;
     ctx.beginPath();
-    ctx.arc(drone.x, drone.y, 22, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(drone.x - 30, drone.y - 30);
-    ctx.lineTo(drone.x + 30, drone.y + 30);
-    ctx.moveTo(drone.x + 30, drone.y - 30);
-    ctx.lineTo(drone.x - 30, drone.y + 30);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(drone.x, drone.y, 9, 0, Math.PI * 2);
-    ctx.fillStyle = "#3ef0a2";
+    ctx.moveTo(drone.x - 9, drone.y + 46);
+    ctx.lineTo(drone.x + 9, drone.y + 46);
+    ctx.lineTo(drone.x + 30, drone.y + 200);
+    ctx.lineTo(drone.x - 30, drone.y + 200);
+    ctx.closePath();
     ctx.fill();
+
+    ctx.save();
+    ctx.translate(drone.x, drone.y);
+    if (!isMobile) {
+      ctx.shadowColor = "rgba(62, 240, 162, 0.75)";
+      ctx.shadowBlur = 20;
+    }
+
+    // rotating dashed gyro ring
+    ctx.save();
+    ctx.rotate(rotorPhase * 0.4);
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([15, 10]);
     ctx.beginPath();
-    ctx.arc(drone.x, drone.y, 4, 0, Math.PI * 2);
+    ctx.arc(0, 0, 34, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+
+    // three sweeping rotor arcs
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+    for (let i = 0; i < 3; i++) {
+      const a = rotorPhase + (i * Math.PI * 2) / 3;
+      ctx.beginPath();
+      ctx.arc(0, 0, 47, a, a + 0.75);
+      ctx.stroke();
+    }
+
+    // hexagonal core (shadowBlur carries the glow onto the stroke)
+    ctx.save();
+    ctx.rotate(Math.sin(rotorPhase * 0.5) * 0.08);
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const a = i * Math.PI / 3 - Math.PI / 6;
+      const x = Math.cos(a) * 20, y = Math.sin(a) * 20;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
     ctx.fillStyle = "#05070b";
     ctx.fill();
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // scanning eye
+    ctx.beginPath();
+    ctx.arc(0, 2, 7, 0, Math.PI * 2);
+    ctx.fillStyle = ink;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.beginPath();
+    ctx.arc(0, 2, 3, 0, Math.PI * 2);
+    ctx.fillStyle = "#05070b";
+    ctx.fill();
+    ctx.restore();
+
+    ctx.restore();
   }
 
   function step() {
@@ -578,6 +636,33 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
       },
     });
   });
+
+  /* fade the whole track out as the section un-pins — otherwise the last
+     cards clip half-scrolled at the exit frame, which reads as a glitch */
+  gsap.fromTo(track,
+    { opacity: 1 },
+    {
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#skills",
+        start: "bottom 82%",
+        end: "bottom 45%",
+        scrub: true,
+      },
+    });
+  gsap.fromTo(track,
+    { opacity: 0 },
+    {
+      opacity: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#skills",
+        start: "top 15%",
+        end: "top top",
+        scrub: true,
+      },
+    });
 
   if (!isTouch) {
     document.querySelectorAll("[data-tilt]").forEach((card) => {

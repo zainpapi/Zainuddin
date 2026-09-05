@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Scrap 5 — the terminal that behaved -->
+  <rect width="512" height="512" fill="#0b0e14"/>
+  <rect x="56" y="86" width="400" height="300" rx="14" fill="#11161f" stroke="#3ef0a2" stroke-width="6"/>
+  <circle cx="92" cy="122" r="8" fill="#3ef0a2"/>
+  <circle cx="118" cy="122" r="8" fill="#3ef0a2" opacity=".6"/>
+  <circle cx="144" cy="122" r="8" fill="#3ef0a2" opacity=".3"/>
+  <g font-family="monospace" font-weight="700">
+    <text x="90" y="192" font-size="30" fill="#3ef0a2">$ npm run dev</text>
+    <text x="90" y="240" font-size="26" fill="#f5eeda" opacity=".85">ready in 214 ms</text>
+    <text x="90" y="290" font-size="26" fill="#ffd23e">0 errors</text>
+    <text x="90" y="340" font-size="26" fill="#3ef0a2">✓ local:3000</text>
+  </g>
+  <text x="256" y="452" text-anchor="middle" font-family="Bangers, cursive" font-size="34" fill="#3ef0a2">it works on first try?!</text>
+</svg>

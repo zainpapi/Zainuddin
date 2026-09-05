@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Scrap 6 — phantom sigil -->
+  <rect width="512" height="512" fill="#f5eeda"/>
+  <circle cx="256" cy="236" r="150" fill="none" stroke="#16181d" stroke-width="6"/>
+  <circle cx="256" cy="236" r="118" fill="none" stroke="#16181d" stroke-width="3" stroke-dasharray="10 8"/>
+  <path d="M256 130c48 0 76 34 76 74v106l-38-27-38 27-38-27-38 27V204c0-40 28-74 76-74z" fill="#e62429" stroke="#16181d" stroke-width="7"/>
+  <circle cx="230" cy="212" r="11" fill="#f5eeda"/>
+  <circle cx="282" cy="212" r="11" fill="#f5eeda"/>
+  <path d="M236 250q20 16 40 0" stroke="#f5eeda" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <text x="256" y="452" text-anchor="middle" font-family="Bangers, cursive" font-size="34" fill="#16181d">the ghost in the machine</text>
+</svg>

@@ -653,7 +653,7 @@ body.phantom .hero__sub em { color: var(--ink); }
    ============================================================ */
 .scrapbook {
   position: relative;
-  padding: 18vh 0 10vh;
+  padding: 14vh 0 8vh;
   overflow: hidden;
   background: var(--paper);
 }
@@ -670,7 +670,9 @@ body.phantom .hero__sub em { color: var(--ink); }
 }
 .scrapbook__stage {
   position: relative;
-  height: 150vh;
+  height: 115vh;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 .scrap {
   position: absolute;
@@ -717,6 +719,10 @@ body.phantom .hero__sub em { color: var(--ink); }
   padding: 14px 22px;
   border-radius: 50%;
   transform: rotate(-10deg);
+}
+.scrap-sticker--green {
+  background: var(--green);
+  color: var(--paper);
 }
 
 /* ============================================================
@@ -988,6 +994,7 @@ body.phantom .footer__bio strong { color: var(--ink); }
   .scrapbook { padding: 12vh 0 6vh; }
   .skills__track { gap: 9vw; padding: 0 10vw; }
   .finale__btn { padding: 16px 26px; }
+  .scrapbook__stage { height: auto; }
   .scrapbook__stage {
     height: auto;
     display: flex;
