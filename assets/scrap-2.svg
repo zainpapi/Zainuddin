@@ -1,16 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Scrap 2 — ghost mascot burst -->
+  <!-- Scrap 2 — code mascot burst -->
   <rect width="512" height="512" fill="#2b3a9e"/>
   <g stroke="#f5eeda" stroke-width="10" fill="#f5eeda">
-    <path d="M256 120c58 0 92 40 92 92v180l-46-34-46 34-46-34-46 34V212c0-52 34-92 92-92z"/>
+    <rect x="120" y="150" width="272" height="180" rx="20"/>
   </g>
-  <g fill="#16181d">
-    <circle cx="222" cy="212" r="14"/>
-    <circle cx="290" cy="212" r="14"/>
+  <g fill="#2b3a9e">
+    <path d="M180 240l54-36-20 36 20 36z"/>
+    <path d="M332 240l-54-36 20 36-20 36z"/>
+    <path d="M256 216l-20 48"/>
   </g>
-  <path d="M228 256q28 24 56 0" stroke="#16181d" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <circle cx="256" cy="240" r="66" fill="none" stroke="#2b3a9e" stroke-width="8"/>
   <g fill="#ffd23e" stroke="#16181d" stroke-width="6">
     <path d="M256 40l14 34 34-14-14 34 34 14-34 14 14 34-34-14-14 34-14-34-34 14 14-34-34-14 34-14-14-34 34 14z"/>
   </g>
-  <text x="256" y="470" text-anchor="middle" font-family="Bangers, cursive" font-size="38" fill="#f5eeda">PHANTOM GO BRRR</text>
+  <text x="256" y="470" text-anchor="middle" font-family="Bangers, cursive" font-size="38" fill="#f5eeda">code go brrr</text>
 </svg>

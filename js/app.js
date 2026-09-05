@@ -283,6 +283,7 @@ if (!isTouch) {
   function drawDrone() {
     ctx.clearRect(0, 0, W, H);
     const ink = getComputedStyle(document.body).getPropertyValue("--ink").trim() || "#3ef0a2";
+    const red = getComputedStyle(document.body).getPropertyValue("--red").trim() || "#3ef0a2";
     rotorPhase += 0.32;
 
     // exhaust trail
@@ -293,24 +294,11 @@ if (!isTouch) {
       ctx.fill();
     }
 
-    // scan beam — the phantom is always watching below
-    const beam = ctx.createLinearGradient(drone.x, drone.y + 46, drone.x, drone.y + 200);
-    beam.addColorStop(0, "rgba(62, 240, 162, 0.22)");
-    beam.addColorStop(1, "rgba(62, 240, 162, 0)");
-    ctx.fillStyle = beam;
-    ctx.beginPath();
-    ctx.moveTo(drone.x - 9, drone.y + 46);
-    ctx.lineTo(drone.x + 9, drone.y + 46);
-    ctx.lineTo(drone.x + 30, drone.y + 200);
-    ctx.lineTo(drone.x - 30, drone.y + 200);
-    ctx.closePath();
-    ctx.fill();
-
     ctx.save();
     ctx.translate(drone.x, drone.y);
     if (!isMobile) {
-      ctx.shadowColor = "rgba(62, 240, 162, 0.75)";
-      ctx.shadowBlur = 20;
+      ctx.shadowColor = "rgba(62, 240, 162, 0.7)";
+      ctx.shadowBlur = 18;
     }
 
     // rotating dashed gyro ring
@@ -325,44 +313,40 @@ if (!isTouch) {
     ctx.setLineDash([]);
     ctx.restore();
 
-    // three sweeping rotor arcs
+    // orbiting ticks (like a spinning code load spinner)
     ctx.strokeStyle = ink;
     ctx.lineWidth = 3;
     ctx.lineCap = "round";
-    for (let i = 0; i < 3; i++) {
-      const a = rotorPhase + (i * Math.PI * 2) / 3;
+    for (let i = 0; i < 4; i++) {
+      const a = rotorPhase + (i * Math.PI) / 2;
+      const x0 = Math.cos(a) * 24, y0 = Math.sin(a) * 24;
+      const x1 = Math.cos(a) * 34, y1 = Math.sin(a) * 34;
       ctx.beginPath();
-      ctx.arc(0, 0, 47, a, a + 0.75);
+      ctx.moveTo(x0, y0);
+      ctx.lineTo(x1, y1);
       ctx.stroke();
     }
 
-    // hexagonal core (shadowBlur carries the glow onto the stroke)
-    ctx.save();
-    ctx.rotate(Math.sin(rotorPhase * 0.5) * 0.08);
+    // rounded code badge
+    ctx.fillStyle = red;
     ctx.beginPath();
-    for (let i = 0; i < 6; i++) {
-      const a = i * Math.PI / 3 - Math.PI / 6;
-      const x = Math.cos(a) * 20, y = Math.sin(a) * 20;
-      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-    }
-    ctx.closePath();
-    ctx.fillStyle = "#05070b";
+    ctx.roundRect(-30, -22, 60, 44, 12);
     ctx.fill();
+    ctx.shadowBlur = 0;
     ctx.strokeStyle = ink;
     ctx.lineWidth = 3;
     ctx.stroke();
 
-    // scanning eye
+    // the </> glyph inside the badge
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
     ctx.beginPath();
-    ctx.arc(0, 2, 7, 0, Math.PI * 2);
-    ctx.fillStyle = ink;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    ctx.beginPath();
-    ctx.arc(0, 2, 3, 0, Math.PI * 2);
-    ctx.fillStyle = "#05070b";
-    ctx.fill();
-    ctx.restore();
+    ctx.moveTo(-8, -8); ctx.lineTo(-18, 0); ctx.lineTo(-8, 8);
+    ctx.moveTo(8, -8);  ctx.lineTo(18, 0);  ctx.lineTo(8, 8);
+    ctx.moveTo(7, -9);  ctx.lineTo(-7, 9);
+    ctx.stroke();
 
     ctx.restore();
   }
@@ -426,7 +410,7 @@ if (!isTouch) {
     ctx.lineWidth = 1.6;
     ctx.stroke();
 
-    // ghost at the tip, bobbing and swaying
+    // the code glyph at the tip — a swinging </> that bobs and sways
     const tip = pts[SEGMENTS - 1];
     const prev = pts[SEGMENTS - 2];
     const ang = Math.atan2(tip.y - prev.y, tip.x - prev.x) - Math.PI / 2;
@@ -436,37 +420,38 @@ if (!isTouch) {
     ctx.save();
     ctx.translate(tip.x, tip.y);
     ctx.rotate(Math.sin(bobPhase) * 0.14 + (ang - Math.PI / 2) * 0.2);
-    const s = Math.min(W, H) / 16;
+    const s = Math.min(W, H) / 15;
 
-    // ghost body
+    // rounded code badge behind the glyph
     ctx.fillStyle = red;
     ctx.beginPath();
-    ctx.moveTo(0, -s * 0.5);
-    ctx.bezierCurveTo(s * 0.42, -s * 0.5, s * 0.46, -s * 0.05, s * 0.46, s * 0.05);
-    ctx.lineTo(s * 0.46, s * 0.42);
-    // wavy bottom
-    ctx.quadraticCurveTo(s * 0.3, s * 0.3, s * 0.23, s * 0.44);
-    ctx.quadraticCurveTo(s * 0.12, s * 0.3, 0, s * 0.44);
-    ctx.quadraticCurveTo(-s * 0.12, s * 0.3, -s * 0.23, s * 0.44);
-    ctx.quadraticCurveTo(-s * 0.3, s * 0.3, -s * 0.46, s * 0.42);
-    ctx.lineTo(-s * 0.46, s * 0.05);
-    ctx.bezierCurveTo(-s * 0.46, -s * 0.05, -s * 0.42, -s * 0.5, 0, -s * 0.5);
-    ctx.closePath();
+    ctx.roundRect(-s * 0.62, -s * 0.5, s * 1.24, s * 1.0, s * 0.22);
     ctx.fill();
-    ctx.lineWidth = Math.max(1.5, s * 0.045);
+    ctx.lineWidth = Math.max(1.5, s * 0.05);
     ctx.strokeStyle = ink;
     ctx.stroke();
 
-    // eyes
-    ctx.fillStyle = ink;
+    // the </> glyph
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = s * 0.14;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    // left <
     ctx.beginPath();
-    ctx.ellipse(-s * 0.16, -s * 0.16, s * 0.09, s * 0.13, 0, 0, Math.PI * 2);
-    ctx.ellipse(s * 0.16, -s * 0.16, s * 0.09, s * 0.13, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    // mouth
+    ctx.moveTo(-s * 0.12, -s * 0.28);
+    ctx.lineTo(-s * 0.4, 0);
+    ctx.lineTo(-s * 0.12, s * 0.28);
+    ctx.stroke();
+    // right >
     ctx.beginPath();
-    ctx.arc(0, s * 0.08, s * 0.14, 0.15 * Math.PI, 0.85 * Math.PI);
+    ctx.moveTo(s * 0.12, -s * 0.28);
+    ctx.lineTo(s * 0.4, 0);
+    ctx.lineTo(s * 0.12, s * 0.28);
+    ctx.stroke();
+    // slash /
+    ctx.beginPath();
+    ctx.moveTo(s * 0.12, -s * 0.34);
+    ctx.lineTo(-s * 0.12, s * 0.34);
     ctx.stroke();
 
     ctx.restore();
@@ -497,6 +482,26 @@ gsap.to(".hero__content", {
   scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom 30%", scrub: true },
 });
 
+/* hero code symbols — gentle drift + a couple that bob more, all parallaxing */
+gsap.utils.toArray(".hero__sym").forEach((el, i) => {
+  const depth = parseFloat(el.style.getPropertyValue("--sd")) || 0.5;
+  gsap.to(el, {
+    y: () => -70 * depth,
+    x: () => (i % 2 ? 40 * depth : -40 * depth),
+    ease: "none",
+    scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true },
+  });
+  // idle float so they don't sit frozen
+  gsap.to(el, {
+    y: "+=18",
+    duration: gsap.utils.random(2.4, 3.6),
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true,
+    delay: i * 0.3,
+  });
+});
+
 /* ------------------------------------------------------------
    MARQUEES — infinite loop, speed & direction react to scroll
 ------------------------------------------------------------ */
@@ -524,6 +529,17 @@ marquee("#marquee2", -1);
 (function origin() {
   const scenes = gsap.utils.toArray(".origin__scene");
   const num = document.getElementById("originNum");
+
+  // scroll-expand: the comic panel grows + straightens as it enters the viewport
+  gsap.fromTo(".origin__frame",
+    { scale: 0.72, rotation: -6, opacity: 0.4 },
+    {
+      scale: 1,
+      rotation: 0,
+      opacity: 1,
+      ease: "none",
+      scrollTrigger: { trigger: "#origin", start: "top 90%", end: "top 28%", scrub: 0.5 },
+    });
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -760,13 +776,71 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
     clearProps: "transform",
     scrollTrigger: { trigger: "#contact", start: "top 75%", once: true },
   });
-  gsap.from([".contact__kicker", ".contact__btn", ".contact__links", ".footer"], {
+  gsap.from([".contact__kicker", ".contact__btn", ".contact__links", ".term", ".stats", ".footer"], {
     opacity: 0,
     y: 26,
     duration: 0.7,
     stagger: 0.1,
     clearProps: "all",
     scrollTrigger: { trigger: "#contact", start: "top 70%", once: true },
+  });
+
+  /* live terminal — types itself the first time it scrolls into view */
+  const term = document.getElementById("termBody");
+  if (term) {
+    const ROWS = [
+      { prompt: true, text: "zain --status" },
+      { key: "mode", val: "front-end & playful engineering", quote: true },
+      { key: "location", val: "Quetta, PK [UTC+5]" },
+      { key: "stack", val: "HTML · CSS · JS · TS · GSAP" },
+      { key: "uptime", val: "shipping since 2023" },
+      { key: "missions", val: "5 shipped · 0 templates" },
+      { key: "open_to", val: "freelance + internships" },
+      { key: "contact", val: "github.com/zainpapi — say salaam", good: true },
+      { prompt: true, caret: true },
+    ];
+    const esc2 = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    let started = false;
+    const typeAll = () => {
+      if (started || !term.isConnected) return;
+      started = true;
+      let i = 0;
+      const next = () => {
+        if (i >= ROWS.length) return;
+        const r = ROWS[i++];
+        const row = document.createElement("span");
+        row.style.display = "block";
+        if (r.prompt) {
+          row.innerHTML = `<span class="t-key">&gt; ${esc2(r.text || "")}</span>`
+            + (r.caret ? ' <span class="t-caret"></span>' : "");
+        } else {
+          const val = r.quote ? `"${r.val}"` : r.val;
+          row.innerHTML = `  <span class="t-dim">${r.key}</span>  `
+            + `<span class="${r.good ? "t-ok" : r.quote ? "t-key" : ""}">${esc2(val)}</span>`;
+        }
+        term.appendChild(row);
+        setTimeout(next, 160);
+      };
+      next();
+    };
+    ScrollTrigger.create({ trigger: "#termCard", start: "top 85%", once: true, onEnter: typeAll });
+    setTimeout(typeAll, 6000); // safety: even if triggers die, it types
+  }
+
+  /* comic stat counters */
+  document.querySelectorAll(".stats__num").forEach((el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = target >= 1200 ? "+" : "";
+    const obj = { v: 0 };
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 88%",
+      once: true,
+      onEnter: () => gsap.to(obj, {
+        v: target, duration: 1.6, ease: "power2.out",
+        onUpdate: () => { el.textContent = Math.round(obj.v) + suffix; },
+      }),
+    });
   });
 
   const btn = document.getElementById("magnetBtn");
@@ -839,7 +913,7 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
 })();
 
 /* ------------------------------------------------------------
-   PHANTOM OPS — full dark alter-ego theme (press / or tap the switch)
+   NIGHT SHIFT — full dark alter-ego theme (press / or tap the switch)
    Swaps every image, every line of copy, the physics toy,
    the cursor splat, and the whole palette. Two sites in one.
 ------------------------------------------------------------ */
@@ -851,34 +925,34 @@ const IMG_SWAPS = [
 ];
 
 const TEXT_SWAPS = [
-  [".header__logo", "<span class=\"header__logo-mark\">🟢</span> PHANTOM.DEV"],
-  [".hero__kicker", "<span>NIGHT SHIFT</span> · THE PHANTOM DEVELOPER · EST. QUETTA"],
-  [".hero__sub", "They scroll by day. <em>I ship by night.</em><br/>Welcome to Phantom Ops."],
-  [".hero__sticker--1 span", "I AM<br/>PHANTOM"],
+  [".header__logo", "<span class=\"header__logo-mark\">🟢</span> NIGHT.SHIFT"],
+  [".hero__kicker", "<span>NIGHT SHIFT</span> · THE MIDNIGHT DEVELOPER · EST. QUETTA"],
+  [".hero__sub", "They scroll by day. <em>I ship by night.</em><br/>Welcome to the night shift."],
+  [".hero__sticker--1 span", "I AM<br/>NIGHT"],
   [".hero__sticker--2 span", "PEW!"],
   [".hero__scrollhint span", "SCROLL OR FLY"],
   ["#marquee1 .marquee__track span:nth-child(1)", "NIGHT SHIFT ✦ DARK MODE ✦ SHIP WHILE THEY SLEEP ✦ DISCORD BOTS ✦ AUTOMATION ✦ BUILDING NON-STOP ✦&nbsp;"],
   ["#marquee1 .marquee__track span:nth-child(2)", "NIGHT SHIFT ✦ DARK MODE ✦ SHIP WHILE THEY SLEEP ✦ DISCORD BOTS ✦ AUTOMATION ✦ BUILDING NON-STOP ✦&nbsp;"],
-  ['.origin__scene[data-scene="0"] .origin__caption p', "Every hero has a midnight mode…"],
+  ['.origin__scene[data-scene="0"] .origin__caption p', "Every hero has a night shift…"],
   ['.origin__scene[data-scene="1"] .origin__caption p', "…when the city sleeps, <b>the terminal glows</b>."],
   ['.origin__scene[data-scene="2"] .origin__caption p', "Every commit is a footprint in the dark."],
   ['.origin__scene[data-scene="3"] .origin__caption p', "Quetta sleeps. The code ships."],
   [".manifesto__small", "— night protocol —"],
-  [".manifesto__sign", "— the phantom, probably"],
+  [".manifesto__sign", "— someone with 14 tabs open"],
   [".skills__intro p", "← the night shift<br/>scrolls right"],
   ['.scrap[data-depth="0.4"] figcaption', "shipping in the dark"],
-  ['.scrap[data-depth="0.9"] figcaption', "phantom protocol"],
+  ['.scrap[data-depth="0.9"] figcaption', "night shift protocol"],
   ['.scrap[data-depth="0.6"] figcaption', "city of winds, city of commits"],
   ['.scrap[data-depth="1.2"] figcaption', "no sleep till deploy"],
   ['.scrap-sticker:not(.scrap-sticker--burst)', "100 commits ✓<br/>before sunrise"],
   [".scrap-sticker--burst", "PEW!"],
-  ["#marquee2 .marquee__track span:nth-child(1)", "PEW ✦ PEW ✦ I AM PHANTOM ✦ SOMETIMES YOU GOTTA RUN BEFORE YOU CAN WALK ✦&nbsp;"],
-  ["#marquee2 .marquee__track span:nth-child(2)", "PEW ✦ PEW ✦ I AM PHANTOM ✦ SOMETIMES YOU GOTTA RUN BEFORE YOU CAN WALK ✦&nbsp;"],
-  [".contact__kicker", "THE PHANTOM TAKES COMMISSIONS."],
+  ["#marquee2 .marquee__track span:nth-child(1)", "PEW ✦ PEW ✦ I AM NIGHT ✦ SOMETIMES YOU GOTTA RUN BEFORE YOU CAN WALK ✦&nbsp;"],
+  ["#marquee2 .marquee__track span:nth-child(2)", "PEW ✦ PEW ✦ I AM NIGHT ✦ SOMETIMES YOU GOTTA RUN BEFORE YOU CAN WALK ✦&nbsp;"],
+  [".contact__kicker", "THE NIGHT SHIFT TAKES COMMISSIONS."],
   [".contact__title-line:nth-child(1)", "GO"],
   [".contact__title-line:nth-child(2)", "DARK"],
-  [".contact__btn-text", "SUMMON THE PHANTOM"],
-  [".finale__label", "RETURN TO <strong>CADET MODE</strong> 👻"],
+  [".contact__btn-text", "SUMMON THE NIGHT"],
+  [".finale__label", "RETURN TO <strong>DAYLIGHT</strong> ☀️"],
   [".finale__hint", "— had enough of the dark? —"],
 ];
 
