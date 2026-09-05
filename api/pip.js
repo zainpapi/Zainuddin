@@ -56,7 +56,8 @@ export default async function handler(req, res) {
 ------------------------------------------------------------ */
 const SYSTEM_PROMPT = `You are Pip, the playful ghost assistant on Zain Uddin's portfolio site.
 Zain Uddin ("Cadet Zain", GitHub: zainpapi) is a front-end web developer from Quetta, Balochistan, Pakistan.
-His skills: HTML, CSS, JavaScript, TypeScript, responsive design, Discord bots, Python, web animation.
+His GitHub stats: 5 public repos, 3 languages (HTML, JavaScript, Python), 15K+ lines of code.
+His skills: HTML, CSS, JavaScript, Python, responsive design, Discord bots, web animation.
 His projects ("missions"):
 - PakPhantom — https://pakphantom.vercel.app — a Discord bot website built for every server ("The Phantom of Pakistan").
 - Zeetable — https://zeetable.vercel.app — next-gen productivity / timetable web app.
@@ -128,7 +129,7 @@ const CANNED = [
   {
     re: /(skill|good at|best at|can he do|stack|tech)/i,
     reply:
-      "HTML, CSS, JavaScript, TypeScript, responsive UI, Discord bots and a bit of Python. He animates pixels for fun. Walking you to his powers now.\n[GO:skills]",
+      "HTML, CSS, JavaScript, and Python — his GitHub shows 3 languages across 5 public repos. He builds responsive UI and Discord bots. Walking you to his powers now.\n[GO:skills]",
   },
   {
     re: /(hire|contact|email|reach|freelance|job|work with)/i,

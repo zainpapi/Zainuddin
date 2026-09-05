@@ -794,7 +794,7 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
       { key: "location", val: "Quetta, PK [UTC+5]" },
       { key: "stack", val: "HTML · CSS · JS · TS · GSAP" },
       { key: "uptime", val: "shipping since 2023" },
-      { key: "missions", val: "5 shipped · 0 templates" },
+      { key: "missions", val: "5 repos · 0 templates" },
       { key: "open_to", val: "freelance + internships" },
       { key: "contact", val: "github.com/zainpapi — say salaam", good: true },
       { prompt: true, caret: true },
@@ -887,7 +887,7 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
           chart.style.transform = "rotate(0deg) scale(1)";
           const fill = chart.querySelector(".stat-chart__fill");
           if (fill) {
-            const targetWidth = fill.style.width;
+            const targetWidth = fill.getAttribute("data-width");
             fill.style.width = "0";
             setTimeout(() => {
               fill.style.width = targetWidth;

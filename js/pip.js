@@ -235,7 +235,7 @@
     },
     {
       re: /(skill|good at|best at|can he do|stack|tech)/i,
-      reply: "HTML, CSS, JavaScript, TypeScript, responsive UI, Discord bots and a bit of Python. He animates pixels for fun. Walking you to his powers now.\n[GO:skills]",
+      reply: "HTML, CSS, JavaScript, and Python — his GitHub shows 3 languages across 5 public repos. He builds responsive UI and Discord bots. Walking you to his powers now.\n[GO:skills]",
     },
     {
       re: /(hire|contact|email|reach|freelance|job|work with)/i,
