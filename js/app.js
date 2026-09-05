@@ -843,6 +843,37 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
     });
   });
 
+  /* tech stack bars animation */
+  document.querySelectorAll(".tech-stack__fill").forEach((bar) => {
+    const width = bar.style.width;
+    bar.style.width = "0";
+    ScrollTrigger.create({
+      trigger: bar,
+      start: "top 90%",
+      once: true,
+      onEnter: () => gsap.to(bar, {
+        width: width,
+        duration: 1.2,
+        ease: "power2.out"
+      })
+    });
+  });
+
+  /* code bombs floating animation */
+  const codeBombs = document.querySelectorAll(".code-bomb");
+  ScrollTrigger.create({
+    trigger: ".code-bombs",
+    start: "top 80%",
+    once: true,
+    onEnter: () => {
+      codeBombs.forEach((bomb, index) => {
+        setTimeout(() => {
+          bomb.classList.add("visible");
+        }, index * 200);
+      });
+    }
+  });
+
   const btn = document.getElementById("magnetBtn");
   if (!isTouch) {
     window.addEventListener("mousemove", (e) => {
