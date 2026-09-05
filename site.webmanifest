@@ -1,0 +1,12 @@
+{
+  "name": "Zain Uddin — Front-End Developer Portfolio",
+  "short_name": "ZAIN.DEV",
+  "description": "Portfolio of Zain Uddin — front-end developer from Quetta, Pakistan. With great code comes great sites.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5eeda",
+  "theme_color": "#e62429",
+  "icons": [
+    { "src": "/assets/favicon-64.png", "sizes": "64x64", "type": "image/png" }
+  ]
+}

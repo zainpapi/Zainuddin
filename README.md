@@ -1,94 +1,55 @@
-# Zain Uddin — 3D Portfolio
+# ZAIN.DEV — Comic Portfolio of Zain Uddin
 
-A premium, glassmorphic portfolio with a real-time 3D layer: a flowing aurora shader, refractive glass objects (true light-bending glass via `MeshTransmissionMaterial`), frosted-glass UI panels, and buttery smooth scroll. Built to be a deliberate departure from my earlier cyberpunk-themed portfolio — calmer, more editorial, more premium.
+A hand-coded, zero-build comic-book portfolio. Two sites in one:
+**Cadet Zain** (light comic mode) and **Phantom Ops** (dark alter-ego, press `/`).
 
-## Tech stack
+## Stack
 
-- **Next.js 16** (App Router, Turbopack) + **React 19** + **TypeScript**
-- **three** + **@react-three/fiber** + **@react-three/drei** — declarative WebGL
-- **@react-three/postprocessing** — bloom + vignette
-- **framer-motion** — scroll reveals, 3D card tilt
-- **lenis** — smooth scrolling
-- **Tailwind CSS v4** — styling (CSS-based config in `app/globals.css`)
-- Fonts: **Space Grotesk** (display) + **Inter** (body) via `next/font`
+- Vanilla HTML/CSS/JS — no framework, no bundler
+- GSAP 3.12.5 + ScrollTrigger (animations, pinned sections)
+- Lenis 1.1.18 (smooth scroll)
+- Hand-rolled verlet physics on `<canvas>` (the swinging ghost / phantom drone)
+- 1 serverless function (`api/pip.js`) powering **Pip**, the AI guide bot
 
-## Getting started
+## Run locally
 
-```bash
-npm install
-npm run dev      # http://localhost:3000
-```
-
-Production build & run:
+Any static server from this folder works, e.g.:
 
 ```bash
-npm run build
-npm run start
+npx serve .
+# or
+python -m http.server 3000
 ```
 
-## Editing content
+Note: the chatbot needs the serverless function, so locally it falls back
+to the built-in offline brain (still works — no key needed).
 
-All content lives in **`src/data/site.ts`** — no need to touch components.
-
-- `site` — your name, role, tagline, positioning line, email, socials
-- `skills` — the four skill clusters shown in the Skills grid
-- `projects` — the projects shown in the Work section (each links to a live site)
-- `journey` — the timeline milestones
-- `navLinks` — the top navigation
-
-To add a project, append an object to the `projects` array:
-
-```ts
-{
-  id: "new-project",
-  name: "New Project",
-  year: "2026",
-  role: "Developer",
-  description: "What it does, in one or two sentences.",
-  stack: ["Next.js", "TypeScript"],
-  href: "https://your-live-url.example",
-  accent: "indigo", // "indigo" | "violet" | "teal"
-}
-```
-
-## How it's structured
-
-```
-app/
-├── layout.tsx           # fonts, metadata, skip-link, SmoothScroll
-├── page.tsx             # composes the canvas + all sections
-└── globals.css          # theme tokens, glass utilities, type scale
-
-src/
-├── three/               # the WebGL background layer
-│   ├── BackgroundCanvas.tsx  # fixed <Canvas>: lights, env, postprocessing
-│   ├── AuroraShader.tsx      # flowing aurora (custom fragment shader)
-│   ├── GlassObjects.tsx      # refractive glass shapes (transmission material)
-│   ├── ParticleField.tsx     # floating depth particles
-│   └── ParallaxRig.tsx       # mouse/scroll parallax group
-├── components/
-│   ├── sections/        # Hero, Statement, Skills, Projects, Journey, Contact
-│   ├── GlassCard.tsx    # reusable frosted-glass card w/ 3D cursor tilt
-│   ├── Nav.tsx · Loader.tsx · ScrollHint.tsx · Icon.tsx
-│   ├── AuroraIntensity.tsx   # ramps the aurora up near the Contact finale
-│   └── SmoothScroll.tsx      # Lenis provider
-├── lib/                 # motion variants + media-query hooks
-└── data/                # all editable content
-```
-
-## Performance & accessibility
-
-- Background `<Canvas>` is lazy-loaded (`ssr: false`) so first paint is fast.
-- DPR capped (`[1, 1.75]` desktop, `[1, 1.4]` touch); lower particle count + simpler materials on touch.
-- `prefers-reduced-motion`: disables Lenis smoothing, the aurora drift, card tilt, and postprocessing.
-- All content is real semantic HTML over the canvas — the 3D is decorative, never the only carrier of information. Skip-link, focus-visible rings, keyboard-navigable links, and landmark roles throughout.
-
-## Deploy
-
-Optimized for **Vercel**:
+## Deploy to Vercel
 
 1. Push this folder to a GitHub repo.
-2. Import the repo at [vercel.com/new](https://vercel.com/new).
-3. Framework preset auto-detects Next.js — no env vars needed. Deploy.
+2. On [vercel.com](https://vercel.com) → **Add New Project** → import the repo.
+3. Framework preset: **Other** (it's a static site + one serverless function).
+4. (Optional) For the smart Pip brain, add env vars:
+   - `OPENROUTER_API_KEY` — free keys at openrouter.ai
+   - `PIP_MODEL` — e.g. `meta-llama/llama-3.2-3b-instruct:free`
+   Without a key, Pip uses the offline canned brain.
 
-Any static host that runs `next build` / `next start` (or the `@vercel/next` adapter) works too.
+## Customize
+
+- Copy lives in `index.html` (and the theme swaps in `js/app.js` → `TEXT_SWAPS` / `IMG_SWAPS`)
+- Colors live in `css/style.css` (`:root` + `body.phantom`)
+- Art: all `assets/*.svg` are hand-drawn pop-art SVGs — edit freely
+- When you get a public email, swap the contact button + JSON-LD in `index.html`
+
+## Structure
+
+```
+site/
+├── index.html          # the whole page + SEO + JSON-LD
+├── css/style.css       # design system + both themes
+├── css/pip.css         # chatbot styles
+├── js/app.js           # physics + scroll choreography + theme engine
+├── js/pip.js           # chatbot frontend (talks to /api/pip)
+├── api/pip.js          # serverless brain (key stays server-side)
+└── assets/             # avatar, project shots, SVG comic art, OG image
+```

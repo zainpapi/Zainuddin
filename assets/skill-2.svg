@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- SKILL 02 — motion & animation -->
+  <defs>
+    <pattern id="hs2" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.8" fill="#16181d" opacity=".18"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="#ffd23e"/>
+  <rect width="800" height="500" fill="url(#hs2)"/>
+  <g stroke="#16181d" stroke-width="7" fill="#f5eeda">
+    <circle cx="240" cy="210" r="52"/>
+  </g>
+  <g stroke="#16181d" stroke-width="7" fill="none" stroke-linecap="round">
+    <path d="M240 262v96"/><path d="M240 288l-56 44"/><path d="M240 288l56 44"/>
+    <path d="M240 300l-64 30"/><path d="M240 300l64 30"/>
+    <path d="M100 330c40-40 100-60 140-64"/>
+    <path d="M380 330c-40-40-100-60-140-64"/>
+  </g>
+  <g fill="#e62429" opacity=".85">
+    <circle cx="240" cy="210" r="52"/>
+  </g>
+  <g stroke="#16181d" stroke-width="7" fill="none" stroke-linecap="round" opacity=".55">
+    <circle cx="200" cy="210" r="52"/><circle cx="160" cy="210" r="52"/>    <circle cx="120" cy="210" r="52"/>
+  </g>
+  <text x="580" y="120" font-family="Bangers, cursive" font-size="52" fill="#16181d" transform="rotate(-6 580 120)">MOTION!</text>
+  <text x="560" y="380" font-family="Bangers, cursive" font-size="40" fill="#16181d" transform="rotate(3 560 380)">60fps or nothing</text>
+</svg>

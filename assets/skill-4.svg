@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- SKILL 04 — automation & bots -->
+  <defs>
+    <pattern id="hs4" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.8" fill="#16181d" opacity=".18"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="#2f9e57"/>
+  <rect width="800" height="500" fill="url(#hs4)"/>
+  <g stroke="#16181d" stroke-width="7" fill="none" stroke-linecap="round">
+    <path d="M120 380V240h140"/>
+    <path d="M680 380V240h-140"/>
+    <path d="M400 80v80"/>
+  </g>
+  <g stroke="#16181d" stroke-width="7" fill="#f5eeda">
+    <circle cx="400" cy="230" r="70"/>
+  </g>
+  <g stroke="#16181d" stroke-width="6" fill="#16181d">
+    <circle cx="375" cy="215" r="9"/>
+    <circle cx="425" cy="215" r="9"/>
+  </g>
+  <path d="M370 252q30 22 60 0" stroke="#16181d" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <g stroke="#16181d" stroke-width="6" fill="#ffd23e">
+    <rect x="60" y="350" width="120" height="70" rx="10"/>
+    <rect x="620" y="350" width="120" height="70" rx="10"/>
+  </g>
+  <g stroke="#16181d" stroke-width="5" fill="none" stroke-linecap="round">
+    <path d="M85 385h70M85 402h48"/>
+    <path d="M645 385h70M645 402h48"/>
+  </g>
+  <text x="400" y="470" text-anchor="middle" font-family="Bangers, cursive" font-size="40" fill="#f5eeda">bots that hustle while he sleeps</text>
+</svg>

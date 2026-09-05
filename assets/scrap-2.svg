@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Scrap 2 — ghost mascot burst -->
+  <rect width="512" height="512" fill="#2b3a9e"/>
+  <g stroke="#f5eeda" stroke-width="10" fill="#f5eeda">
+    <path d="M256 120c58 0 92 40 92 92v180l-46-34-46 34-46-34-46 34V212c0-52 34-92 92-92z"/>
+  </g>
+  <g fill="#16181d">
+    <circle cx="222" cy="212" r="14"/>
+    <circle cx="290" cy="212" r="14"/>
+  </g>
+  <path d="M228 256q28 24 56 0" stroke="#16181d" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <g fill="#ffd23e" stroke="#16181d" stroke-width="6">
+    <path d="M256 40l14 34 34-14-14 34 34 14-34 14 14 34-34-14-14 34-14-34-34 14 14-34-34-14 34-14-14-34 34 14z"/>
+  </g>
+  <text x="256" y="470" text-anchor="middle" font-family="Bangers, cursive" font-size="38" fill="#f5eeda">PHANTOM GO BRRR</text>
+</svg>

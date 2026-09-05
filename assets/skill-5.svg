@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- SKILL 05 — ship it fast -->
+  <defs>
+    <pattern id="hs5" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.8" fill="#16181d" opacity=".18"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="#f5eeda"/>
+  <rect width="800" height="500" fill="url(#hs5)"/>
+  <g stroke="#16181d" stroke-width="6" fill="none" stroke-linecap="round" opacity=".7">
+    <path d="M90 150h140M90 190h100M90 230h160"/>
+  </g>
+  <g stroke="#16181d" stroke-width="7" fill="#16181d">
+    <path d="M470 120l190 130-190 130c14-42 20-88 20-130s-6-88-20-130z"/>
+  </g>
+  <g fill="#e62429" opacity=".9">
+    <path d="M300 240h150l30 10-30 10H300z"/>
+    <path d="M270 218h80l22 12-22 12h-80z"/>
+    <path d="M250 270h70l20 10-20 10h-70z"/>
+  </g>
+  <text x="620" y="450" text-anchor="middle" font-family="Bangers, cursive" font-size="46" fill="#16181d" transform="rotate(-4 620 450)">SHIP IT!</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Dark alter-ego origin 3 — the grid -->
+  <rect width="800" height="500" fill="#0b0e14"/>
+  <defs>
+    <linearGradient id="dgr3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3ef0a2" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#0b0e14" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="260" fill="url(#dgr3)"/>
+  <g stroke="#3ef0a2" stroke-width="2.5" opacity=".4">
+    <path d="M0 340h800M0 380h800M0 420h800"/>
+    <path d="M120 500L340 260M280 500L420 280M440 500L500 300M600 500L580 300M720 500L660 300"/>
+  </g>
+  <g stroke="#3ef0a2" stroke-width="7" fill="none" stroke-linecap="round">
+    <path d="M110 430V210"/>
+    <path d="M110 250h170"/>
+    <path d="M690 430V210"/>
+    <path d="M690 250h-170"/>
+  </g>
+  <g stroke="#3ef0a2" stroke-width="6" fill="#0b0e14">
+    <rect x="280" y="180" width="240" height="110" rx="12"/>
+  </g>
+  <g font-family="monospace" font-weight="700" fill="#3ef0a2">
+    <text x="400" y="248" text-anchor="middle" font-size="38">git push origin main</text>
+  </g>
+  <text x="400" y="462" text-anchor="middle" font-family="Bangers, cursive" font-size="42" fill="#3ef0a2">every commit is a footprint in the dark</text>
+</svg>

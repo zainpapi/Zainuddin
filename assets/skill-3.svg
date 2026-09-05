@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- SKILL 03 — responsive UI builder -->
+  <defs>
+    <pattern id="hs3" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.8" fill="#16181d" opacity=".18"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="#e62429"/>
+  <rect width="800" height="500" fill="url(#hs3)"/>
+  <g stroke="#16181d" stroke-width="7" fill="#f5eeda">
+    <rect x="120" y="110" width="360" height="240" rx="12"/>
+    <rect x="520" y="170" width="150" height="260" rx="16"/>
+  </g>
+  <g stroke="#16181d" stroke-width="6" fill="#ffd23e">
+    <rect x="150" y="140" width="130" height="80" rx="6"/>
+    <rect x="305" y="140" width="150" height="80" rx="6"/>
+    <rect x="150" y="240" width="305" height="80" rx="6"/>
+    <rect x="545" y="200" width="100" height="120" rx="6"/>
+  </g>
+  <g stroke="#16181d" stroke-width="6" fill="none" stroke-linecap="round">
+    <path d="M300 60l60 26-60 26"/>
+    <path d="M500 60l-60 26 60 26"/>
+  </g>
+  <text x="400" y="440" text-anchor="middle" font-family="Bangers, cursive" font-size="40" fill="#f5eeda">one codebase, every screen</text>
+</svg>

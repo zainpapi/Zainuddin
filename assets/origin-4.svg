@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- ORIGIN PAGE 4 — now he builds worlds before breakfast -->
+  <defs>
+    <pattern id="ht4" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="2.2" fill="#16181d" opacity=".16"/>
+    </pattern>
+    <linearGradient id="sky4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2b3a9e" stop-opacity=".8"/>
+      <stop offset="100%" stop-color="#f5eeda" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="#f5eeda"/>
+  <rect width="800" height="500" fill="url(#ht4)"/>
+  <rect width="800" height="260" fill="url(#sky4)"/>
+  <g fill="#16181d" opacity=".85">
+    <rect x="70" y="120" width="90" height="180"/>
+    <rect x="190" y="70" width="120" height="230"/>
+    <rect x="340" y="130" width="80" height="170"/>
+    <rect x="450" y="40" width="140" height="260"/>
+    <rect x="620" y="110" width="110" height="190"/>
+  </g>
+  <g fill="#ffd23e">
+    <rect x="105" y="150" width="20" height="20"/>
+    <rect x="230" y="110" width="24" height="24"/>
+    <rect x="370" y="170" width="18" height="18"/>
+    <rect x="500" y="90" width="26" height="26"/>
+    <rect x="540" y="160" width="20" height="20"/>
+    <rect x="660" y="150" width="20" height="20"/>
+    <rect x="205" y="180" width="20" height="20"/>
+  </g>
+  <g stroke="#16181d" stroke-width="6" fill="#e62429">
+    <path d="M330 470c40-90 120-120 170-110l-40 60c50-10 90 20 110 60z"/>
+  </g>
+  <g stroke="#16181d" stroke-width="6" fill="#f5eeda">
+    <circle cx="560" cy="120" r="34"/>
+  </g>
+  <text x="400" y="452" text-anchor="middle" font-family="Bangers, cursive" font-size="46" fill="#16181d">now he ships worlds from Quetta</text>
+</svg>

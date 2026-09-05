@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- ORIGIN PAGE 2 — the radioactive idea: first <html> tag -->
+  <defs>
+    <pattern id="ht2" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="2.2" fill="#16181d" opacity=".16"/>
+    </pattern>
+    <radialGradient id="glow2" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#fff3b0"/>
+      <stop offset="55%" stop-color="#ffd23e"/>
+      <stop offset="100%" stop-color="#ffd23e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="#f5eeda"/>
+  <rect width="800" height="500" fill="url(#ht2)"/>
+  <circle cx="400" cy="205" r="165" fill="url(#glow2)"/>
+  <g stroke="#16181d" stroke-width="7" fill="none" stroke-linecap="round">
+    <line x1="400" y1="0" x2="400" y2="40"/>
+    <line x1="400" y1="370" x2="400" y2="420"/>
+    <line x1="235" y1="205" x2="280" y2="205"/>
+    <line x1="520" y1="205" x2="565" y2="205"/>
+    <line x1="295" y1="100" x2="330" y2="135"/>
+    <line x1="470" y1="275" x2="505" y2="310"/>
+    <line x1="505" y1="100" x2="470" y2="135"/>
+    <line x1="330" y1="275" x2="295" y2="310"/>
+  </g>
+  <g font-family="monospace" font-weight="700">
+    <rect x="300" y="150" width="200" height="110" rx="14" fill="#16181d"/>
+    <text x="400" y="218" text-anchor="middle" font-size="40" fill="#ffd23e">&lt;/&gt;</text>
+  </g>
+  <g fill="#e62429">
+    <path d="M150 60l26 44h-52z"/><circle cx="150" cy="122" r="9"/>
+    <path d="M660 400l-26-44h52z"/><circle cx="660" cy="338" r="9"/>
+  </g>
+  <text x="400" y="462" text-anchor="middle" font-family="Bangers, cursive" font-size="46" fill="#16181d" transform="rotate(1.5 400 462)">…bitten by a radioactive idea called CODE</text>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Dark alter-ego origin 1 — the barracks terminal -->
+  <rect width="800" height="500" fill="#0b0e14"/>
+  <defs>
+    <pattern id="dt1" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="2" fill="#3ef0a2" opacity=".1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#dt1)"/>
+  <g stroke="#3ef0a2" stroke-width="6" fill="none" stroke-linecap="round" opacity=".9">
+    <rect x="120" y="130" width="560" height="260" rx="14"/>
+    <line x1="120" y1="180" x2="680" y2="180"/>
+  </g>
+  <g fill="#3ef0a2">
+    <circle cx="152" cy="156" r="7"/>
+    <circle cx="182" cy="156" r="7" opacity=".6"/>
+    <circle cx="212" cy="156" r="7" opacity=".3"/>
+  </g>
+  <g font-family="monospace" fill="#3ef0a2" font-weight="700">
+    <text x="150" y="240" font-size="30">&gt; whoami</text>
+    <text x="150" y="290" font-size="30">&gt; phantom_of_quetta</text>
+    <text x="150" y="340" font-size="30">&gt; status: building_</text>
+  </g>
+  <text x="400" y="460" text-anchor="middle" font-family="Bangers, cursive" font-size="42" fill="#3ef0a2" opacity=".9">every hero has a midnight mode</text>
+</svg>

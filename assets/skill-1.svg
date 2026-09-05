@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- SKILL 01 — prompt whisperer -->
+  <defs>
+    <pattern id="hs1" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.8" fill="#16181d" opacity=".18"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="#2b3a9e"/>
+  <rect width="800" height="500" fill="url(#hs1)"/>
+  <g stroke="#f5eeda" stroke-width="8" stroke-linecap="round" opacity=".25">
+    <path d="M60 80h180M60 130h120M60 180h200"/>
+  </g>
+  <g stroke="#16181d" stroke-width="7" fill="#f5eeda">
+    <path d="M430 120c110 0 180 60 180 130s-70 130-180 130c-45 0-85-12-115-32l-85 30 30-78c-8-18-10-34-10-50 0-72 75-130 180-130z"/>
+  </g>
+  <g font-family="monospace" font-weight="700" fill="#16181d">
+    <text x="470" y="230" font-size="42">do a</text>
+    <text x="470" y="280" font-size="42">backflip</text>
+  </g>
+  <g stroke="#16181d" stroke-width="6" fill="#ffd23e">
+    <circle cx="205" cy="255" r="46"/>
+  </g>
+  <g stroke="#16181d" stroke-width="6" fill="none" stroke-linecap="round">
+    <path d="M150 180c-40-30-60-10-70 10"/>
+    <path d="M138 320c-50 20-60 50-52 74"/>
+    <path d="M258 330c40 30 70 30 92 10"/>
+  </g>
+  <text x="400" y="60" text-anchor="middle" font-family="Bangers, cursive" font-size="40" fill="#f5eeda">PROMPT WHISPERER</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- ORIGIN PAGE 3 — building the skill tree -->
+  <defs>
+    <pattern id="ht3" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="2.2" fill="#16181d" opacity=".16"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="#f5eeda"/>
+  <rect width="800" height="500" fill="url(#ht3)"/>
+  <g stroke="#16181d" stroke-width="6" fill="none" stroke-linecap="round">
+    <path d="M110 420V150"/>
+    <path d="M110 200H300"/>
+    <path d="M110 300H260"/>
+    <path d="M690 420V150"/>
+    <path d="M690 200H500"/>
+    <path d="M690 300H540"/>
+  </g>
+  <g stroke="#16181d" stroke-width="6" fill="#fff">
+    <rect x="300" y="120" width="200" height="90" rx="10"/>
+    <rect x="260" y="250" width="280" height="90" rx="10"/>
+  </g>
+  <g font-family="monospace" font-weight="700" fill="#16181d">
+    <text x="400" y="178" text-anchor="middle" font-size="38">&lt;div&gt;</text>
+    <text x="400" y="308" text-anchor="middle" font-size="30">hello world</text>
+  </g>
+  <g stroke="#16181d" stroke-width="5" fill="#e62429" opacity=".9">
+    <path d="M355 395c0-18 45-18 45 0s-45 18-45 0z"/>
+    <path d="M420 380c0-14 34-14 34 0s-34 14-34 0z"/>
+    <path d="M470 400c0-12 28-12 28 0s-28 12-28 0z"/>
+  </g>
+  <text x="400" y="470" text-anchor="middle" font-family="Bangers, cursive" font-size="44" fill="#16181d" transform="rotate(-1.5 400 470)">learned HTML, CSS, JS — forged the first suit</text>
+</svg>
