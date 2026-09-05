@@ -561,12 +561,12 @@ body.phantom .hero__sym { color: var(--ink); opacity: 0.14; }
    MANIFESTO
    ============================================================ */
 .manifesto {
-  min-height: 90vh;
+  min-height: 60vh;
   display: grid;
   place-content: center;
   gap: 26px;
   text-align: center;
-  padding: 16vh 6vw;
+  padding: 10vh 6vw;
   background: var(--paper);
   position: relative;
   z-index: 2;
@@ -591,6 +591,116 @@ body.phantom .hero__sym { color: var(--ink); opacity: 0.14; }
   font-size: clamp(15px, 1.8vw, 22px);
   opacity: 0.8;
 }
+
+/* ============================================================
+   STAT CHARTS (after manifesto)
+   ============================================================ */
+.stat-charts {
+  padding: 8vh 6vw;
+  background: var(--paper);
+  position: relative;
+  z-index: 1;
+}
+.stat-charts__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.stat-chart {
+  background: #fff;
+  border: 4px solid var(--ink);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 8px 8px 0 var(--ink);
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+}
+.stat-chart:nth-child(2n) { transform: rotate(2deg); }
+.stat-chart:nth-child(3) { transform: rotate(-1deg); }
+.stat-chart:hover { transform: rotate(0deg) scale(1.05); box-shadow: 12px 12px 0 var(--ink); }
+.stat-chart__icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  display: block;
+}
+.stat-chart__value {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 48px);
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.stat-chart__label {
+  font-family: var(--font-comic);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+.stat-chart__bar {
+  height: 10px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+}
+.stat-chart__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red), #ff6b6b);
+  border-radius: 3px;
+  width: 0;
+  transition: width 1.5s ease-out;
+}
+body.phantom .stat-chart { background: #0b120e; border-color: #2ba86b; }
+body.phantom .stat-chart__value { color: #2ba86b; }
+body.phantom .stat-chart__label { color: #e0e0e0; }
+body.phantom .stat-chart__bar { background: rgba(43, 168, 107, 0.2); border-color: #2ba86b; }
+body.phantom .stat-chart__fill { background: linear-gradient(90deg, #2ba86b, #3dd98a); }
+
+/* fun message card */
+.fun-message {
+  margin-top: 6vh;
+  display: flex;
+  justify-content: center;
+}
+.fun-message__bubble {
+  background: #fff;
+  border: 4px solid var(--ink);
+  border-radius: 20px;
+  padding: 20px 30px;
+  max-width: 600px;
+  box-shadow: 10px 10px 0 var(--ink);
+  transform: rotate(1deg);
+  position: relative;
+}
+.fun-message__bubble::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid var(--ink);
+}
+.fun-message__text {
+  font-family: var(--font-hand);
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: var(--ink);
+  display: block;
+}
+.fun-message__emoji {
+  font-size: 24px;
+  margin-left: 10px;
+}
+body.phantom .fun-message__bubble { background: #0b120e; border-color: #2ba86b; }
+body.phantom .fun-message__bubble::before { border-bottom-color: #2ba86b; }
+body.phantom .fun-message__text { color: #e0e0e0; }
 
 /* ============================================================
    SKILLS — pinned horizontal scroll
@@ -1103,8 +1213,8 @@ body.phantom .tech-stack__fill { background: linear-gradient(90deg, #2ba86b, #3d
 .code-bombs {
   margin-top: 10vh;
   position: relative;
-  height: 200px;
-  max-width: 900px;
+  height: 350px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1125,12 +1235,18 @@ body.phantom .tech-stack__fill { background: linear-gradient(90deg, #2ba86b, #3d
   transition: opacity 0.5s ease;
 }
 .code-bomb.visible { opacity: 1; }
-.code-bomb--1 { top: 10%; left: 5%; animation-delay: 0s; transform: rotate(-5deg); }
-.code-bomb--2 { top: 30%; right: 10%; animation-delay: 1s; transform: rotate(3deg); }
-.code-bomb--3 { top: 50%; left: 15%; animation-delay: 2s; transform: rotate(-2deg); }
-.code-bomb--4 { top: 70%; right: 5%; animation-delay: 3s; transform: rotate(4deg); }
-.code-bomb--5 { top: 20%; left: 40%; animation-delay: 4s; transform: rotate(-3deg); }
-.code-bomb--6 { top: 60%; right: 25%; animation-delay: 5s; transform: rotate(2deg); }
+.code-bomb--1 { top: 8%; left: 3%; animation-delay: 0s; transform: rotate(-5deg); }
+.code-bomb--2 { top: 25%; right: 8%; animation-delay: 0.5s; transform: rotate(3deg); }
+.code-bomb--3 { top: 45%; left: 12%; animation-delay: 1s; transform: rotate(-2deg); }
+.code-bomb--4 { top: 65%; right: 4%; animation-delay: 1.5s; transform: rotate(4deg); }
+.code-bomb--5 { top: 18%; left: 35%; animation-delay: 2s; transform: rotate(-3deg); }
+.code-bomb--6 { top: 55%; right: 20%; animation-delay: 2.5s; transform: rotate(2deg); }
+.code-bomb--7 { top: 35%; left: 50%; animation-delay: 3s; transform: rotate(-4deg); }
+.code-bomb--8 { top: 75%; right: 35%; animation-delay: 3.5s; transform: rotate(1deg); }
+.code-bomb--9 { top: 12%; right: 50%; animation-delay: 4s; transform: rotate(-1deg); }
+.code-bomb--10 { top: 42%; left: 25%; animation-delay: 4.5s; transform: rotate(3deg); }
+.code-bomb--11 { top: 62%; right: 12%; animation-delay: 5s; transform: rotate(-2deg); }
+.code-bomb--12 { top: 28%; left: 65%; animation-delay: 5.5s; transform: rotate(2deg); }
 
 @keyframes floatCode {
   0%, 100% { transform: translateY(0) rotate(var(--rotation, 0deg)); }
@@ -1241,6 +1357,10 @@ body.phantom .footer__bio strong { color: var(--ink); }
    ============================================================ */
 @media (max-width: 760px) {
   .manifesto { padding: 12vh 6vw; }
+  .stat-charts { padding: 6vh 4vw; }
+  .stat-charts__grid { grid-template-columns: 1fr; gap: 16px; }
+  .fun-message__bubble { padding: 16px 20px; }
+  .fun-message__text { font-size: 14px; }
   .scrapbook { padding: 12vh 0 6vh; }
   .skills__track { gap: 9vw; padding: 0 10vw; }
   .finale__btn { padding: 16px 26px; }

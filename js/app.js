@@ -869,10 +869,50 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
       codeBombs.forEach((bomb, index) => {
         setTimeout(() => {
           bomb.classList.add("visible");
-        }, index * 200);
+        }, index * 150);
       });
     }
   });
+
+  /* stat charts animation */
+  const statCharts = document.querySelectorAll(".stat-chart");
+  ScrollTrigger.create({
+    trigger: ".stat-charts",
+    start: "top 75%",
+    once: true,
+    onEnter: () => {
+      statCharts.forEach((chart, index) => {
+        setTimeout(() => {
+          chart.style.opacity = "1";
+          chart.style.transform = "rotate(0deg) scale(1)";
+          const fill = chart.querySelector(".stat-chart__fill");
+          if (fill) {
+            const targetWidth = fill.style.width;
+            fill.style.width = "0";
+            setTimeout(() => {
+              fill.style.width = targetWidth;
+            }, 50);
+          }
+        }, index * 150);
+      });
+    }
+  });
+
+  /* fun message bubble animation */
+  const funMessage = document.querySelector(".fun-message__bubble");
+  if (funMessage) {
+    ScrollTrigger.create({
+      trigger: "#funMessage",
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        gsap.fromTo(funMessage, 
+          { opacity: 0, y: 30, rotation: -5 },
+          { opacity: 1, y: 0, rotation: 1, duration: 0.8, ease: "back.out(1.7)" }
+        );
+      }
+    });
+  }
 
   const btn = document.getElementById("magnetBtn");
   if (!isTouch) {
