@@ -612,7 +612,8 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
       duration: 0.85,
       delay: (i % 2) * 0.12,
       ease: "back.out(1.6)",
-      scrollTrigger: { trigger: card, start: "top 88%" },
+      clearProps: "all",
+      scrollTrigger: { trigger: card, start: "top 92%", once: true },
     });
   });
 })();
@@ -671,14 +672,16 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
     duration: 1,
     stagger: 0.12,
     ease: "power4.out",
-    scrollTrigger: { trigger: "#contact", start: "top 60%" },
+    clearProps: "transform",
+    scrollTrigger: { trigger: "#contact", start: "top 75%", once: true },
   });
   gsap.from([".contact__kicker", ".contact__btn", ".contact__links", ".footer"], {
     opacity: 0,
     y: 26,
     duration: 0.7,
     stagger: 0.1,
-    scrollTrigger: { trigger: "#contact", start: "top 50%" },
+    clearProps: "all",
+    scrollTrigger: { trigger: "#contact", start: "top 70%", once: true },
   });
 
   const btn = document.getElementById("magnetBtn");
@@ -820,9 +823,11 @@ function applyTheme(phantom) {
 
   try { localStorage.setItem("theme", phantom ? "phantom" : "cadet"); } catch (e) {}
 
-  /* clearProps is load-bearing: any leftover transform on <main> turns it into
-     the containing block for position:fixed, which breaks ScrollTrigger pins */
-  gsap.fromTo("main", { scale: 0.985 }, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.4)", clearProps: "transform" });
+  /* NOTE: no transform/scale animation on <main> here. Any transform on an
+     ancestor turns it into the containing block for ScrollTrigger's pins —
+     pinned sections lose their spacing and neighbouring sections slide
+     OVER them (the overlap bug). The palette + image swap is dramatic
+     enough on its own. */
 }
 
 function toggleTheme() {
@@ -846,3 +851,32 @@ try {
 
 /* refresh triggers once everything (fonts/images) settles */
 window.addEventListener("load", () => ScrollTrigger.refresh());
+
+/* ------------------------------------------------------------
+   INTRO GUARD — content must never stay invisible.
+   Background tabs / busy CPUs can stall the intro timeline after
+   it has applied its "from" state (opacity 0), leaving the hero
+   blank forever. A 1s interval survives throttling where rAF and
+   long timeouts may not: if the intro hasn't completed within 12s
+   of load, kill the frozen tweens and force the end state.
+------------------------------------------------------------ */
+(function introGuard() {
+  let tries = 0;
+  const iv = setInterval(() => {
+    tries++;
+    const kicker = document.querySelector(".hero__kicker");
+    if (!kicker) { clearInterval(iv); return; }
+    const visible = parseFloat(getComputedStyle(kicker).opacity) >= 0.5;
+    if (visible) { clearInterval(iv); return; }
+    if (tries >= 12) {
+      const sel = [".hero__kicker", ".hero__sub", ".hero__scrollhint", ".header", ".hero__sticker", ".hero__word"];
+      gsap.killTweensOf(sel);
+      gsap.set(sel, { clearProps: "all", opacity: 1 });
+      clearInterval(iv);
+    }
+  }, 1000);
+})();
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) ScrollTrigger.refresh();
+});

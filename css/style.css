@@ -309,6 +309,7 @@ body.phantom .header__cta { background: var(--ink); }
   display: grid;
   place-items: center;
   overflow: hidden;
+  background: var(--paper);
 }
 .hero__canvas {
   position: absolute;
@@ -542,6 +543,9 @@ body.phantom .hero__sub em { color: var(--ink); }
   gap: 26px;
   text-align: center;
   padding: 16vh 6vw;
+  background: var(--paper);
+  position: relative;
+  z-index: 2;
 }
 .manifesto__small {
   font-family: var(--font-comic);
@@ -567,8 +571,8 @@ body.phantom .hero__sub em { color: var(--ink); }
 /* ============================================================
    SKILLS — pinned horizontal scroll
    ============================================================ */
-.skills { overflow: hidden; }
-.skills__pin { height: 100vh; display: flex; align-items: center; overflow: hidden; }
+.skills { overflow: hidden; background: var(--paper); }
+.skills__pin { height: 100vh; display: flex; align-items: center; overflow: hidden; background: var(--paper); }
 .skills__track {
   display: flex;
   align-items: center;
@@ -651,6 +655,7 @@ body.phantom .hero__sub em { color: var(--ink); }
   position: relative;
   padding: 18vh 0 10vh;
   overflow: hidden;
+  background: var(--paper);
 }
 .scrapbook__title {
   text-align: center;
@@ -717,7 +722,12 @@ body.phantom .hero__sub em { color: var(--ink); }
 /* ============================================================
    MISSIONS
    ============================================================ */
-.missions { padding: 16vh 6vw; }
+.missions {
+  padding: 16vh 6vw;
+  background: var(--paper);
+  position: relative;
+  z-index: 2;
+}
 .missions__head { text-align: center; margin-bottom: 8vh; }
 .missions__kicker {
   font-family: var(--font-comic);
@@ -830,6 +840,7 @@ body.phantom .hero__sub em { color: var(--ink); }
   padding: 20vh 6vw 6vh;
   text-align: center;
   overflow: hidden;
+  background: var(--paper);
 }
 .contact__web {
   position: absolute;

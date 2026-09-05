@@ -88,6 +88,9 @@ body.phantom .pip-fab { background: #11161f; color: var(--ink); }
   box-shadow: 10px 10px 0 var(--ink);
   overflow: hidden;
 }
+/* display:flex above would beat the UA's [hidden] rule — the panel could
+   never actually close. This makes `hidden` win again. */
+.pip[hidden] { display: none !important; }
 .pip__halftone {
   position: absolute;
   inset: 0;
