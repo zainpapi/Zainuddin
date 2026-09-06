@@ -87,18 +87,18 @@ document.querySelectorAll('a[href^="#"]').forEach((a) => {
 ------------------------------------------------------------ */
 function heroIntro() {
   const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-  tl.from(".hero__word", { yPercent: 110, duration: 1.1, stagger: 0.12 })
-    .from(".hero__kicker", { opacity: 0, y: 18, duration: 0.6 }, "-=0.6")
-    .from(".hero__sub", { opacity: 0, y: 22, duration: 0.6 }, "-=0.45")
-    .from(".hero__sticker", {
-      scale: 0,
-      rotation: () => gsap.utils.random(-50, 50),
-      duration: 0.7,
-      ease: "elastic.out(1, 0.45)",
-      stagger: 0.1,
-    }, "-=0.5")
-    .from(".hero__scrollhint", { opacity: 0, duration: 0.5 }, "-=0.3")
-    .from(".header", { y: -70, opacity: 0, duration: 0.7 }, "-=0.8");
+  // fromTo (not from): if this timeline is ever killed mid-flight the
+  // end states below are explicit and recoverable by the intro guard.
+  tl.fromTo(".hero__word", { yPercent: 110 }, { yPercent: 0, duration: 1.1, stagger: 0.12 })
+    .fromTo(".hero__kicker", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.6")
+    .fromTo(".hero__sub", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.45")
+    .fromTo(".hero__sticker",
+      { scale: 0, rotation: () => gsap.utils.random(-50, 50) },
+      { scale: 1, rotation: 0, duration: 0.7, ease: "elastic.out(1, 0.45)", stagger: 0.1 },
+      "-=0.5"
+    )
+    .fromTo(".hero__scrollhint", { opacity: 0 }, { opacity: 1, duration: 0.5 }, "-=0.3")
+    .fromTo(".header", { y: -70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.8");
 }
 
 /* ------------------------------------------------------------
@@ -698,12 +698,19 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
    MISSIONS — comic cards slam in on scroll
 ------------------------------------------------------------ */
 (function missions() {
-  gsap.from(".missions__head", {
-    y: 50,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power3.out",
-    scrollTrigger: { trigger: "#missions", start: "top 75%" },
+  // hardened: from() inside once-onEnter — created at trigger time, so no
+  // refresh can revert it to its start state (see finale note below)
+  ScrollTrigger.create({
+    trigger: "#missions",
+    start: "top 75%",
+    once: true,
+    onEnter: () =>
+      gsap.from(".missions__head", {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      }),
   });
   gsap.utils.toArray(".mission").forEach((card, i) => {
     gsap.from(card, {
@@ -734,13 +741,18 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
         scrollTrigger: { trigger: "#scrapbook", start: "top bottom", end: "bottom top", scrub: true },
       });
     }
-    gsap.from(el, {
-      opacity: 0,
-      scale: 0.85,
-      rotation: () => gsap.utils.random(-14, 14),
-      duration: 0.8,
-      ease: "back.out(1.8)",
-      scrollTrigger: { trigger: el, start: "top 92%" },
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 92%",
+      once: true,
+      onEnter: () =>
+        gsap.from(el, {
+          opacity: 0,
+          scale: 0.85,
+          rotation: () => gsap.utils.random(-14, 14),
+          duration: 0.8,
+          ease: "back.out(1.8)",
+        }),
     });
   });
 
@@ -754,13 +766,18 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
     });
   }
 
-  gsap.from(".scrapbook__title", {
-    scale: 0.7,
-    rotation: -4,
-    opacity: 0,
-    duration: 0.7,
-    ease: "back.out(2)",
-    scrollTrigger: { trigger: ".scrapbook__title", start: "top 85%" },
+  ScrollTrigger.create({
+    trigger: ".scrapbook__title",
+    start: "top 85%",
+    once: true,
+    onEnter: () =>
+      gsap.from(".scrapbook__title", {
+        scale: 0.7,
+        rotation: -4,
+        opacity: 0,
+        duration: 0.7,
+        ease: "back.out(2)",
+      }),
   });
 })();
 
@@ -940,13 +957,27 @@ buildManifesto("WITH GREAT CODE COMES GREAT SITES", [3, 6]);
   const btn = document.getElementById("themeToggle");
   if (!wrap || !btn) return;
 
-  gsap.from(wrap.children, {
-    opacity: 0,
-    y: 30,
-    duration: 0.6,
-    stagger: 0.12,
-    ease: "power3.out",
-    scrollTrigger: { trigger: wrap, start: "top 88%" },
+  // fromTo + once:true — the end state can never be lost to a
+  // ScrollTrigger refresh reverting a bare gsap.from() to its start values.
+  const reveal = () =>
+    gsap.fromTo(
+      wrap.children,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: "power3.out",
+        clearProps: "transform",
+      }
+    );
+
+  ScrollTrigger.create({
+    trigger: wrap,
+    start: "top 88%",
+    once: true,
+    onEnter: reveal,
   });
 
   ScrollTrigger.create({
@@ -1102,6 +1133,17 @@ window.addEventListener("load", () => ScrollTrigger.refresh());
       const sel = [".hero__kicker", ".hero__sub", ".hero__scrollhint", ".header", ".hero__sticker", ".hero__word"];
       gsap.killTweensOf(sel);
       gsap.set(sel, { clearProps: "all", opacity: 1 });
+      // belt & braces: if GSAP's clock is wedged the set above may never
+      // render — force plain inline styles as a last resort (transform
+      // reset to "" so CSS rotations on stickers survive).
+      setTimeout(() => {
+        sel.forEach((s) =>
+          document.querySelectorAll(s).forEach((el) => {
+            el.style.opacity = "1";
+            el.style.transform = "";
+          })
+        );
+      }, 2000);
       clearInterval(iv);
     }
   }, 1000);

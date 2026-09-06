@@ -76,7 +76,7 @@ body.phantom .footer__bio strong { color: var(--ink); }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scrollbar-width: none; }
+html { scrollbar-width: none; overflow-x: hidden; }
 html::-webkit-scrollbar { display: none; }
 
 body {
@@ -454,7 +454,7 @@ body.phantom .hero__sym { color: var(--ink); opacity: 0.14; }
 }
 @media (max-width: 760px) {
   .hero__sticker--1 { top: 11%; left: 3%; }
-  .hero__sticker--2 { top: 8%; right: 3%; padding: 16px 18px; }
+  .hero__sticker--2 { top: 8%; right: 3%; bottom: auto; padding: 16px 18px; }
 }
 
 /* ============================================================
@@ -555,6 +555,9 @@ body.phantom .hero__sym { color: var(--ink); opacity: 0.14; }
   font-size: 22px;
   letter-spacing: 0.1em;
   color: var(--ink);
+}
+@media (max-width: 760px) {
+  .origin__counter { right: auto; left: 50%; transform: translateX(-50%); }
 }
 
 /* ============================================================
@@ -1055,9 +1058,12 @@ body.phantom .fun-message__text { color: #e0e0e0; }
 
 .finale {
   margin-top: 14vh;
+  margin-bottom: 8vh;
   display: grid;
   place-items: center;
   gap: 18px;
+  position: relative;
+  z-index: 10;
 }
 
 /* ---- live terminal card ---- */
@@ -1291,7 +1297,12 @@ body.phantom .code-bomb { background: #0b120e; color: #2ba86b; border-color: #2b
 body.phantom .panel-break__line { background: #2ba86b; }
 body.phantom .panel-break__line::before { background: #3dd98a; }
 
-.finale__hint { font-family: var(--font-hand); opacity: 0.8; }
+.finale__hint {
+  font-family: var(--font-hand);
+  opacity: 0.8;
+  margin-bottom: 10px;
+  text-align: center;
+}
 .finale__btn {
   position: relative;
   display: inline-flex;
@@ -1308,6 +1319,9 @@ body.phantom .panel-break__line::before { background: #3dd98a; }
   cursor: pointer;
   box-shadow: 6px 6px 0 var(--ink);
   animation: finalePulse 2.4s ease-in-out infinite;
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
 }
 .finale__btn strong { color: var(--red); }
 body.phantom .finale__btn strong { color: var(--ink); }
@@ -1321,7 +1335,13 @@ body.phantom .finale__btn strong { color: var(--ink); }
 body.phantom .finale__core {
   background: radial-gradient(circle, #05070b 0%, var(--ink) 120%);
 }
-.finale__sub { font-family: var(--font-hand); font-size: 15px; opacity: 0.75; }
+.finale__sub {
+  font-family: var(--font-hand);
+  font-size: 15px;
+  opacity: 0.75;
+  margin-top: 10px;
+  text-align: center;
+}
 .finale__kbd kbd {
   font-family: var(--font-body);
   border: 2px solid var(--ink);
