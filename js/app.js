@@ -1129,7 +1129,7 @@ window.addEventListener("load", () => ScrollTrigger.refresh());
     if (!kicker) { clearInterval(iv); return; }
     const visible = parseFloat(getComputedStyle(kicker).opacity) >= 0.5;
     if (visible) { clearInterval(iv); return; }
-    if (tries >= 12) {
+    if (tries >= 8) {
       const sel = [".hero__kicker", ".hero__sub", ".hero__scrollhint", ".header", ".hero__sticker", ".hero__word"];
       gsap.killTweensOf(sel);
       gsap.set(sel, { clearProps: "all", opacity: 1 });
